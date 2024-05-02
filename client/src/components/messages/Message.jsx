@@ -6,16 +6,18 @@ const Message = ({ message }) => {
     const { authUser } = useAuthContext();
     const { selectedConversation } = useConversation();
     const fromMe = message.senderId === authUser._id;
-    const chatClassName = fromMe ? 'fin du chat' : 'debut du chat';
+    
+    // Définir les classes pour contrôler la disposition en fonction de l'expéditeur
+    const flexDirection = fromMe ? 'flex-row-reverse' : 'flex-row';
     const profilePic = fromMe ? authUser.profilePic : selectedConversation?.profilePic;
-    const bubbleBgColor = fromMe ? 'bg-blue-500' : "";
+    const bubbleBgColor = fromMe ? 'bg-blue-500' : "bg-gray-300";  // Supposons une couleur différente pour les autres
     const formattedTime = extractTime(message.createdAt);
 
     return (
-        <div className={`chat ${chatClassName}`}>
+        <div className={`chat flex ${flexDirection} items-center`}>
             <div className='chat-image avatar'>
                 <div className='w-10 rounded-full'>
-                    <img alt='Tailwind CSS chat bubble component' src={profilePic} />
+                    <img alt='User profile' src={profilePic} />
                 </div>
             </div>
             <div className={`chat-bubble text-white ${bubbleBgColor} pb-2`}>{message.message}</div>
@@ -25,3 +27,4 @@ const Message = ({ message }) => {
 };
 
 export default Message;
+

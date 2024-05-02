@@ -3,13 +3,15 @@ import MessageInput from "./MessageInput";
 import Messages from "./Messages";
 import { TiMessages } from "react-icons/ti";
 import { useEffect } from "react";
+import { useAuthContext } from "../../context/AuthContext";
 
 // Define NoChatSelected component first if it's in the same file
 const NoChatSelected = () => {
+    const { authUser } = useAuthContext();
     return (
         <div className='flex items-center justify-center w-full h-full'>
             <div className='px-4 text-center sm:text-lg md:text-xl text-gray-200 font-semibold flex flex-col items-center gap-2'>
-                <p>Salut 👋 John ❄️</p>
+                <p>Salut 👋 {authUser.fullName} ❄️</p>
                 <p>Choisi une vonversation </p>
                 <TiMessages className='text-3xl md:text-6xl text-center' />
             </div>
